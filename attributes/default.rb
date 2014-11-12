@@ -5,8 +5,8 @@ default["php_fpm"]["update_system"] = "true"
 default["php_fpm"]["upgrade_system"] = "true"
 
 default["php_fpm"]["create_users"] = true
-default["php_fpm"]["users"] = 
-'{ "users": 
+default["php_fpm"]["users"] =
+'{ "users":
 	{ 
 		"fpm_user": { "dir": "/base_path", "system": "true", "group": "fpm_group" }
 	}
@@ -20,9 +20,9 @@ when "ubuntu", "debian"
 	default["php_fpm"]["conf_file"] = node[:platform_version].include?("10.04") ? "php5-fpm.conf" : "php-fpm.conf"
 	default["php_fpm"]["pools_path"] = node[:platform_version].include?("10.04") ? "#{node[:php_fpm][:base_path]}/fpm.d" : "#{node[:php_fpm][:base_path]}/pool.d"
 	default["php_fpm"]["pools_include"] = "include=#{node[:php_fpm][:pools_path]}/*.conf"
-	default["php_fpm"]["php_modules"] = [ 'php5-common', 
-											'php5-mysql', 
-											'php5-curl', 
+	default["php_fpm"]["php_modules"] = [ 'php5-common',
+											'php5-mysql',
+											'php5-curl',
 											'php5-gd'
 										] #Option to add more or remove, override if needed or disable
 
@@ -32,15 +32,15 @@ when "centos", "redhat", "fedora"
 	default["php_fpm"]["conf_file"] = "php-fpm.conf"
 	default["php_fpm"]["pools_path"] = "#{node[:php_fpm][:base_path]}/php-fpm.d"
 	default["php_fpm"]["pools_include"] = "include=#{node[:php_fpm][:pools_path]}/*.conf"
-	default["php_fpm"]["php_modules"] = [ 'php-common', 
-											'php-mysql', 
-											'php-curl', 
+	default["php_fpm"]["php_modules"] = [ 'php-common',
+											'php-mysql',
+											'php-curl',
 											'php-gd'
 											] #Option to add more or remove, override if needed or disable
 end
 
 #Set php-fpm.conf configuration
-default["php_fpm"]["config"] = 
+default["php_fpm"]["config"] =
 '{ 	"config":
 	{
 		"pid": "/var/run/php5-fpm.pid",
@@ -55,12 +55,13 @@ default["php_fpm"]["config"] =
 		"daemonize": "yes",
 		"rlimit_files": "NOT_SET",
 		"rlimit_core": "NOT_SET",
-		"events.mechanism": "NOT_SET"
+		"events.mechanism": "NOT_SET",
+		"expose_php": "off"
 	}
 }'
 
 #Set pool configuration, default pool		
-default["php_fpm"]["pools"] = 
+default["php_fpm"]["pools"] =
 '{ 	"www":
 	{
 		"user": "fpm_user",
@@ -93,7 +94,7 @@ default["php_fpm"]["pools"] =
 #### FOR UBUNTU 10.04 ONLY
 
 #Set php-fpm.conf Ubuntu 10.04 configuration
-default["php_fpm"]["ubuntu1004_config"] = 
+default["php_fpm"]["ubuntu1004_config"] =
 '{ 	"config":
 	{
 		"pid": "/var/run/php5-fpm.pid",
@@ -110,7 +111,7 @@ default["php_fpm"]["ubuntu1004_config"] =
 }'
 
 #Set pool configuration, default pool		
-default["php_fpm"]["ubuntu1004_pools"] = 
+default["php_fpm"]["ubuntu1004_pools"] =
 '{ 	"www":
 	{
 		"user": "fpm_user",
