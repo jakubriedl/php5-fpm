@@ -110,7 +110,7 @@ if node[:php_fpm][:update_system] || update_flag
 
             #Do apt-get upgrade
             bash "Run apt-get upgrade" do
-                code "DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade -y"
+                code 'DEBIAN_FRONTEND=noninteractive DEBIAN_PRIORITY=critical apt-get -q -y -o "Dpkg::Options::=--force-confdef" -o "Dpkg::Options::=--force-confold" dist-upgrade'
                 action :run
             end
 
